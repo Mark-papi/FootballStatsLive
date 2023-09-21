@@ -18,8 +18,13 @@ for stage in jsonData['Stages']:
         gameTime = date_time_obj.strftime("%H:%M")
         homeTeam = event['T1'][0]['Nm']
         homeScore = event['Tr1']
-        homeCorners = stats['Stat'][0]['Cos']
-        #homeCorners = tempStats['Cos']
+        
+        #check for if the stats exist for the game if not continue to the rest
+        if "Stat" in stats:
+            homeCorners = stats['Stat'][0]['Cos']
+        else:
+            print("stat do not  exist for: " + gameId)
+            homeCorners = "null"
         
         awayTeam = event['T2'][0]['Nm']
         awayScore = event['Tr2']
@@ -41,4 +46,3 @@ for stage in jsonData['Stages']:
 live_df = pd.DataFrame(rows)
 
 print(live_df)
-#print(stats)
